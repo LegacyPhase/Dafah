@@ -37,6 +37,8 @@ class ItemsList extends Component {
             items: [],
             filteredItems :[],
             SearchString:'',
+            catogery:'',
+            type: ''
         }
     }
 
@@ -67,14 +69,39 @@ class ItemsList extends Component {
         })
     } 
 
-    onSearch = e => {
-        let { items } = this.state
+    // onSearch = e => {
+    //     let { items } = this.state
+    //     let string = e.target.value
+    //     if(string.length > 0){
+    //        let filteredItems = items.filter(item => item.itemName.includes(string))
+    //        this.setState({SearchString:string,filteredItems:filteredItems})
+    //     }
+    //     else this.setState({SearchString:string,filteredItems:[]})
+    // }
+
+    onChangecatogery(e){
+        let { items } = this.state 
         let string = e.target.value
-        if(string.length > 0){
-           let filteredItems = items.filter(item => item.itemName.includes(string))
-           this.setState({SearchString:string,filteredItems:filteredItems})
-        }
-        else this.setState({SearchString:string,filteredItems:[]})
+        this.setState({
+            catogery :e.target.value 
+        },
+        )
+        let filteredItems = items.filter(item => item.catogery.includes(string))
+        this.setState({filteredItems:filteredItems})
+        console.log(string)
+    }
+
+
+    onChangetype(e){
+        let { items } = this.state 
+        let string = e.target.value
+        this.setState({
+            type :e.target.value 
+        },
+        )
+        let filteredItems = items.filter(item => item.type.includes(string))
+        this.setState({filteredItems:filteredItems})
+        console.log(string)
     }
 
 
@@ -84,7 +111,44 @@ class ItemsList extends Component {
             <br />
             <div className = "container text-center border border-light p-9">
                 <h2>Clothing</h2>
-                <input name="search" className="form-control" onChange={e => this.onSearch(e)} value={this.state.SearchString}  placeholder="Search for item Name"/>
+                {/* <input name="search" className="form-control" onChange={e => this.onSearch(e)} value={this.state.SearchString}  placeholder="Search for item Name"/> */}
+                <lable>
+                    Select by catogery..
+                    <select
+                     ref = "userInput"
+                     required ="true"
+                     value = {this.state.catogery}
+                     onChange = {this.onChangecatogery.bind(this)}
+                     >
+                         <option value = ""></option>
+                         <option value = "Women">Women</option>
+                         <option value = "Men">Men</option>
+                         <option value = "Kids">Kids</option>
+
+                    </select>
+                </lable>
+
+
+
+
+                <lable>
+                    Select by type..
+                    <select
+                     ref = "userInput"
+                     required ="true"
+                     value = {this.state.type}
+                     onChange = {this.onChangetype.bind(this)}
+                     >
+                         <option value = ""></option>
+                         <option value = "Shoes">Shoes</option>
+                         <option value = "Dress">Dress</option>
+                         <option value = "Jacket">Jacket</option>
+                         <option value = "Blouse">Blouse</option>
+                         <option value = "Gloves">Gloves</option>
+                         <option value = "Hat">Hat</option>
+                         <option value = "Scarf">Scarf</option>
+                    </select>
+                </lable>
                 <table className = "table">
                 <thead className = "thead">
                     <tr>
