@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-export default class Navbar extends Component {
+export default class Logout extends Component {
   render() {
     return (
       <div>
@@ -24,9 +24,9 @@ export default class Navbar extends Component {
                 </Link>
               </li>
               <li className="navbar-item">
-                <Link to="/login" className="nav-link">
+                {/* <Link to="/login" className="nav-link">
                   Login
-                </Link>
+                </Link> */}
               </li>
               <li className="navbar-item" onClick={logout}>
                 <Link to="/logout" className="nav-link">
