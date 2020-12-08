@@ -16,7 +16,7 @@ router.route('/').get( (req, res) => {
   
 });
 
-//POST(CREATE) new item ....
+//POST(CREATE) new item
 // router.route('/add').post((req, res) => {
 //   const itemName = req.body.itemName;
 //   const category = req.body.category;
@@ -77,7 +77,6 @@ router.route("/:id").delete((req, res) => {
   .then(() => res.json('Item is deleted!'))
   .catch(err => res.status(400).json("Error: " + err));
 });
-
 
 //UPDATE item by ID
 router.route("/update/:id", ).post((req, res) => {
