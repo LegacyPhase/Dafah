@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { Link ,withRouter } from "react-router-dom" ;
 import axios from "axios";
 import Footer from './Footer';
-
-//
 const ClothesItem = props => (
     <tr>
         <td>{props.item.itemName}</td>
@@ -11,7 +9,6 @@ const ClothesItem = props => (
         <td>{props.item.type}</td>
         <td>{props.item.description}</td>
         <td>{props.item.phoneNumber}</td>
-        
         <td>
         <img src= {props.item.image} width="200" height="200" class="w3-round" alt="Norway"/>
         </td>
@@ -25,23 +22,18 @@ const ClothesItem = props => (
         </td>
     </tr>
 )
-
 class ItemsList extends Component {
-
     constructor(props) {
         super(props);
-
         this.deleteItem = this.deleteItem.bind(this);
-
         this.state = {
             items: [],
             filteredItems :[],
             SearchString:'',
-            catogery:'',
+            category:'',
             type: ''
         }
     }
-
     componentDidMount() {
          axios.get("http://localhost:3000/addItems/")   
             .then( res => {
@@ -52,7 +44,6 @@ class ItemsList extends Component {
                 console.log(error);
             })
     }
-
     deleteItem(id) {
         axios.delete("http://localhost:3000/addItems/" + id)
             .then(res => console.log(res.data));
@@ -60,77 +51,52 @@ class ItemsList extends Component {
             items: this.state.items.filter(el => el._id !== id)
         })
     }
-
     itemsList() {
         let listedItems = (this.state.filteredItems.length > 0)? this.state.filteredItems : this.state.items; 
-
         return listedItems.map(currentItem => {
             return <ClothesItem item = { currentItem } deleteItem = { this.deleteItem } key = { currentItem._id }/>; 
         })
     } 
-
-    // onSearch = e => {
-    //     let { items } = this.state
-    //     let string = e.target.value
-    //     if(string.length > 0){
-    //        let filteredItems = items.filter(item => item.itemName.includes(string))
-    //        this.setState({SearchString:string,filteredItems:filteredItems})
-    //     }
-    //     else this.setState({SearchString:string,filteredItems:[]})
-    // }
-
-    onChangecatogery(e){
+    onChangecategory(e){
         let { items } = this.state 
         let string = e.target.value
         this.setState({
-            catogery :e.target.value 
+            category :e.target.value 
         },
         )
-        let filteredItems = items.filter(item => item.catogery.includes(string))
+        let filteredItems = items.filter(item => item.category.includes(string))
         this.setState({filteredItems:filteredItems})
-        console.log(string)
     }
-
-
     onChangetype(e){
-        let { items } = this.state 
+        let { filteredItems } = this.state 
         let string = e.target.value
         this.setState({
             type :e.target.value 
         },
         )
-        let filteredItems = items.filter(item => item.type.includes(string))
+         filteredItems = filteredItems.filter(item => item.type.includes(string))
         this.setState({filteredItems:filteredItems})
-        console.log(string)
     }
-
-
     render() {
         return (
             <div>
             <br />
             <div className = "container text-center border border-light p-9">
                 <h2>Clothing</h2>
-                {/* <input name="search" className="form-control" onChange={e => this.onSearch(e)} value={this.state.SearchString}  placeholder="Search for item Name"/> */}
                 <lable>
-                    Select by catogery..
+                    Select by category..
                     <select
                      ref = "userInput"
                      required ="true"
-                     value = {this.state.catogery}
-                     onChange = {this.onChangecatogery.bind(this)}
+                     value = {this.state.category}
+                     onChange = {this.onChangecategory.bind(this)}
                      >
                          <option value = ""></option>
                          <option value = "Women">Women</option>
                          <option value = "Men">Men</option>
                          <option value = "Kids">Kids</option>
-
                     </select>
                 </lable>
-
-
-
-
                 <lable>
                     Select by type..
                     <select
@@ -170,5 +136,4 @@ class ItemsList extends Component {
         )
     }
 }
-
 export default withRouter(ItemsList)
