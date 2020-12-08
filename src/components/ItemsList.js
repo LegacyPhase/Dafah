@@ -37,8 +37,8 @@ class ItemsList extends Component {
         this.state = {
             items: [],
             filteredItems :[],
-            // SearchString:''
-            category:""
+            SearchString:'',
+            category:''
         }
     }
 
@@ -94,25 +94,18 @@ class ItemsList extends Component {
 
       }
 
-    // onSearch = e => {
-    //     let { items } = this.state
-    //     let string = e.target.value
-    //     if(string.length > 0){
-    //        let filteredItems = items.filter(item => item.category.includes(string))
-    //        this.setState({category:string,filteredItems:filteredItems})
-    //     }
-    //     else this.setState({category:string,filteredItems:[]})
-    // }
+    onSearch = e => {
+        let { items } = this.state
+        let string = e.target.value
+        if(string.length > 0){
+           let filteredItems = items.filter(item => item.itemName.includes(string))
+           console.log(filteredItems)
+           this.setState({SearchString:string,filteredItems:filteredItems})
+        }
+        else this.setState({SearchString:string,filteredItems:[]})
+    }
 
-// onFilter(e){
-//     var category = e.target.value
-//     if(category.length > 0){
-//          let filteredItems = items.filter(item => item.itemName.includes(category))
-//          this.setState({category:category,filteredItems:filteredItems})
-//      }
-//     else this.setState({category:category,filteredItems:[]})
 
-// }
 
     render() {
 
@@ -122,8 +115,8 @@ class ItemsList extends Component {
             <br />
             <div className = "container text-center border border-light p-9">
                 <h2>Clothing</h2>
-                <Search/>
-                <input name="Category" className="form-control" onChange={e => this.onSearch(e)} value={this.state.SearchString}  placeholder="Search for item Name"/>
+               
+                <input name="Search" className="form-control" onChange={e => this.onSearch(e)} value={this.state.SearchString}  placeholder="Search for item Name"/>
                 <table className = "table">
                 <thead className = "thead">
                     <tr>
