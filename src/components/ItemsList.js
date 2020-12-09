@@ -3,7 +3,6 @@ import { Link ,withRouter } from "react-router-dom" ;
 import axios from "axios";
 import Footer from './Footer';
 
-
 const ClothesItem = props => (
     <tr>
         <td>{props.item.itemName}</td>
@@ -36,6 +35,7 @@ class ItemsList extends Component {
             type: ''
         }
     }
+
     componentDidMount() {
          axios.get("http://localhost:3000/addItems/")   
             .then( res => {
@@ -53,6 +53,7 @@ class ItemsList extends Component {
             items: this.state.items.filter(el => el._id !== id)
         })
     }
+
     itemsList() {
         let listedItems = (this.state.filteredItems.length > 0)? this.state.filteredItems : this.state.items; 
         return listedItems.map(currentItem => {
@@ -60,8 +61,6 @@ class ItemsList extends Component {
         })
     } 
   
-
-
     onChangecategory(e){
         let { items } = this.state 
         let string = e.target.value
@@ -72,8 +71,6 @@ class ItemsList extends Component {
         let filteredItems = items.filter(item => item.category.includes(string))
         this.setState({filteredItems:filteredItems})
     }
-
-
     onChangetype(e){
         let { filteredItems } = this.state 
         let string = e.target.value
@@ -84,6 +81,7 @@ class ItemsList extends Component {
          filteredItems = filteredItems.filter(item => item.type.includes(string))
         this.setState({filteredItems:filteredItems})
     }
+
     render() {
         return (
             <div>
@@ -122,6 +120,7 @@ class ItemsList extends Component {
                          <option value = "Scarf">Scarf</option>
                     </select>
                 </lable>
+               
                 <table className = "table">
                 <thead className = "thead">
                     <tr>
