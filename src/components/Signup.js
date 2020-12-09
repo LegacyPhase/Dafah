@@ -21,8 +21,14 @@ export default class Signup extends Component {
       password: "",
       phone: "",
       address: "",
+      // errors: "",
     };
   }
+
+  //handke validation
+  // handleValidation() {
+  //   let 
+  // }
 
   //onChance function to track the changes and help to set (change) the state .
   onChangeUsername(e) {
