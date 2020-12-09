@@ -9,8 +9,9 @@ export default class Navbar extends Component {
           style={{ color: "red" }}
           className="navbar navbar-dark bg-dark navbar-expand-lg"
         >
+         
           <Link to="/Homepage" className="navbar-brand">
-            DAFAH
+          <img src="https://scontent.famm6-1.fna.fbcdn.net/v/t1.0-0/p526x296/130718705_234742021327237_7787704828151028395_o.jpg?_nc_cat=111&ccb=2&_nc_sid=730e14&_nc_ohc=PIRTUk7cZygAX9-gYuB&_nc_ht=scontent.famm6-1.fna&tp=6&oh=daff5e999197a12864302f3a5ef19e3c&oe=5FF749C4" width="50"></img>
           </Link>
           <div className="collpase navbar-collapse">
             <ul className="navbar-nav mr-auto">

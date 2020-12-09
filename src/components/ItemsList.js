@@ -21,12 +21,13 @@ const ClothesItem = (props) => (
     </td>
     <td>
       <Link
+      style={{width:120, height:40}}
         to={"/edit/" + props.item._id}
         className="btn btn-deep-orange darken-4"
       >
         Edit
       </Link>
-      <button
+      <button style={{width:120,height:40}}
         type="button"
         className="btn btn-deep-orange darken-4"
         onClick={() => {
@@ -50,7 +51,6 @@ class ItemsList extends Component {
       type: "",
     };
   }
-
   componentDidMount() {
     axios
       .get("http://localhost:3000/addItems/")
@@ -70,7 +70,6 @@ class ItemsList extends Component {
       items: this.state.items.filter((el) => el._id !== id),
     });
   }
-
   itemsList() {
     let listedItems =
       this.state.filteredItems.length > 0
@@ -86,7 +85,6 @@ class ItemsList extends Component {
       );
     });
   }
-
   onChangecategory(e) {
     let { items } = this.state;
     let string = e.target.value;
@@ -106,50 +104,16 @@ class ItemsList extends Component {
     filteredItems = filteredItems.filter((item) => item.type.includes(string));
     this.setState({ filteredItems: filteredItems });
   }
-
   render() {
     return (
       <div>
         <br />
         <div className="container text-center border border-light p-9">
           <h2>Clothing</h2>
-         
-          {/* <lable>
-            Select by category..
-            <select
-              ref="userInput"
-              required="true"
-              value={this.state.category}
-              onChange={this.onChangecategory.bind(this)}
-            >
-              1
-            </select>
-          </lable>
-      
-          <lable>
-            Select by type..
-            <select
-              ref="userInput"
-              required="true"
-              value={this.state.type}
-              onChange={this.onChangetype.bind(this)}
-            >
-              c
-            </select>
-          </lable> */}
           <Form>
-  <Form.Group controlId="exampleForm.SelectCustomSizeSm" >
-    <Form.Label>Select by category</Form.Label>
-    <Form.Control as="select" size="sm" custom onChange={this.onChangecategory.bind(this)} style={{width:120}}>
-    <option value=""></option>
-    <option value="Women">Women</option>
-    <option value="Men">Men</option>
-    <option value="Kids">Kids</option>
-    </Form.Control>
-  </Form.Group>
   <Form.Group controlId="exampleForm.SelectCustomSizeSm"  onChange={this.onChangetype.bind(this)} >
-    <Form.Label>Select by type</Form.Label>
-    <Form.Control as="select"  size="sm" custom style={{width:120}}>
+    {/* <Form.Label>Select by type</Form.Label> */}
+    <Form.Control as="select"  size="sm" custom style={{width:155, color:'white', border:'orange', margin:"50px 0px 10px 250px", background:'#212121'}} >
     <option value="">Select by type</option>
     <option value="Shoes">Shoes</option>
     <option value="Dress">Dress</option>
@@ -160,12 +124,21 @@ class ItemsList extends Component {
     <option value="Scarf">Scarf</option>
     </Form.Control>
   </Form.Group>
+  <Form.Group controlId="exampleForm.SelectCustomSizeSm" >
+    {/* <Form.Label>Select by category</Form.Label> */}
+    <Form.Control as="select" size="sm" custom onChange={this.onChangecategory.bind(this)} style={{width:155, margin:'-100px 250px 10px 0px', background:'#212121',color:'white'}}>
+    <option value="">Select by category</option>
+    <option value="Women">Women</option>
+    <option value="Men">Men</option>
+    <option value="Kids">Kids</option>
+    </Form.Control>
+  </Form.Group>
 </Form>
 
           <table className="table">
             <thead className="thead">
               <tr>
-                <th>Item Name</th>
+                <th>Item</th>
                 <th>Category</th>
                 <th>Type</th>
                 <th>Description</th>
