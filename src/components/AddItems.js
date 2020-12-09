@@ -122,7 +122,7 @@ import { storage } from "../firebase.js"
     console.log(item);
 
     axios.post("http://localhost:3000/addItems/add", item)
-      .then(res => console.log(res.data, "nooooooo"));
+      .then(res => console.log(res.data));
 
     window.location = '/ItemsList'
   }
@@ -137,12 +137,12 @@ import { storage } from "../firebase.js"
        
           <form className="text-center border border-light p-9" action="#!" onSubmit = {this.onSubmit}>
 
-            <h3> "Only by giving are you able to receive more than you already have." -Jim Rohn </h3>
+            <h3> "Only by giving you are able to receive more than you already have." -Jim Rohn </h3>
 
             <p className="h4 mb-4">Donate Your Item</p>
 
                 <div className="col">
-                <label>Item Name</label>
+                <label>Item</label>
                 <input 
                 required="true"
                   type = "text" 
