@@ -63,6 +63,7 @@ class AddItems extends Component {
   }
   handleUpload() {
     // e.preventDefault();
+    console.log("presss me")
     const uploadTask = storage
       .ref(`/images/${this.state.image.name}`)
       .put(this.state.image);
@@ -85,6 +86,8 @@ class AddItems extends Component {
       }
     );
   }
+
+
   onSubmit(e) {
     e.preventDefault();
     const item = {
@@ -95,7 +98,6 @@ class AddItems extends Component {
       type: this.state.type,
       image: this.state.url,
     };
-    console.log(item);
 
     axios.post("http://localhost:3000/addItems/add", item)
       .then(res => console.log(res.data));
@@ -104,14 +106,14 @@ class AddItems extends Component {
 
   }
   render() {
-    console.log("image", this.state.image);
+
     return (
       <div>
         <br />
 
         <div className = "container">
        
-          <form className="text-center border border-light p-9" action="#!" onSubmit = {this.onSubmit}>
+          <form className="text-center border border-light p-9" action="#!">
 
             <h3> "Only by giving you are able to receive more than you already have." -Jim Rohn </h3>
 
@@ -195,10 +197,9 @@ class AddItems extends Component {
                 type="file"
                 required="true"
                 className="form-control"
-                // value = {this.state.image}
                 onChange={this.onChangeimg}
               />
-              <button onClick={this.handleUpload}>Upload</button>
+              <button onClick={this.handleUpload}  >Upload</button>
               <br />
               <img
                 src={this.state.url || "http://via.placeholder.com/100x150"}
@@ -207,7 +208,7 @@ class AddItems extends Component {
             </div>
             <br />
             <div>
-              <button type="submit" className="btn btn-deep-orange darken-4">
+              <button type="submit"  className="btn btn-deep-orange darken-4" onClick = {this.onSubmit}>
                 Submit
               </button>
             </div>
