@@ -94,7 +94,6 @@ class ItemsList extends Component {
     let filteredItems = items.filter((item) => item.category.includes(string));
     this.setState({ filteredItems: filteredItems });
   }
-
   onChangetype(e) {
     let { filteredItems } = this.state;
     let string = e.target.value;
@@ -134,7 +133,6 @@ class ItemsList extends Component {
     </Form.Control>
   </Form.Group>
 </Form>
-
           <table className="table">
             <thead className="thead">
               <tr>
@@ -155,3 +153,14 @@ class ItemsList extends Component {
   }
 }
 export default withRouter(ItemsList);
+
+
+
+
+
+
+
+
+
+
+
