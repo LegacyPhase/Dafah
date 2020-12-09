@@ -61,8 +61,8 @@ class AddItems extends Component {
       });
     } else console.log("error in onchangeimg");
   }
-  handleUpload() {
-    // e.preventDefault();
+  handleUpload(e) {
+    e.preventDefault();
     console.log("presss me")
     const uploadTask = storage
       .ref(`/images/${this.state.image.name}`)
@@ -192,14 +192,15 @@ class AddItems extends Component {
             </div>
             <br />
             <div className="col">
-              <label>Add Image as URL</label>
+              <label>Upload</label>
               <input
                 type="file"
                 required="true"
                 className="form-control"
                 onChange={this.onChangeimg}
+                
               />
-              <button onClick={this.handleUpload}  >Upload</button>
+              <button  onClick={this.handleUpload}>Upload</button>
               <br />
               <img
                 src={this.state.url || "http://via.placeholder.com/100x150"}
