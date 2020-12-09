@@ -62,19 +62,19 @@ export default class Signup extends Component {
 
     if (!this.state.username) {
       usernameError =
-        "your username cannot be blank, please try to make it more than 3 characters!";
+        "Please fill your username and try to make it 3 characters or more!";
     }
     if (!this.state.password) {
       passwordError =
-        "your password cannot be blank, please try to make it more than 5 characters!";
+        "Please enter your password and try to make it more than 5 characters!";
     }
     if (!this.state.phone) {
       phoneError =
-        "your phone number cannot be blank, it has to be 10 numbers or more!";
+        "Please enter your phone number, at least 10 numbers!";
     }
     if (!this.state.address) {
       addressError =
-        "your address cannot be blank, please try to write more than 4 characters!";
+        "Please enter your address!";
     }
 
     if (usernameError || passwordError || phoneError || addressError) {
@@ -136,7 +136,7 @@ export default class Signup extends Component {
             </div>
 
             <div className="col">
-              <label> Creat Password </label>
+              <label> Create password </label>
               <br></br>
               <input
                 required="true"
@@ -152,7 +152,7 @@ export default class Signup extends Component {
             </div>
 
             <div className="col">
-              <label> Phone Number </label>
+              <label> Phone number </label>
 
               <input
                 required="true"
