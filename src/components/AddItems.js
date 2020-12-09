@@ -181,7 +181,7 @@ class AddItems extends Component {
             </div>
             <br />
             <div className="col">
-              <label>Add Image as URL</label>
+              <label>Add Image</label>
               <input
                 type="file"
                 required="true"
