@@ -145,23 +145,64 @@ class ItemsList extends Component {
             </select>
           </lable>
 
-          <table className="table">
-            <thead className="thead">
-              <tr>
-                <th>Item Name</th>
-                <th>Category</th>
-                <th>Type</th>
-                <th>Description</th>
-                <th>Donor Phone Number</th>
-                <th>Image</th>
-              </tr>
-            </thead>
-            <tbody>{this.itemsList()}</tbody>
-          </table>
-        </div>
-        <Footer />
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div>
+            <br />
+            <div className = "container text-center border border-light p-9">
+                <h2>Clothing</h2>
+                <lable>
+                    Select by category
+                    <select
+                     ref = "userInput"
+                     required ="true"
+                     value = {this.state.category}
+                     onChange = {this.onChangecategory.bind(this)}
+                     >
+                         <option value = ""></option>
+                         <option value = "Women">Women</option>
+                         <option value = "Men">Men</option>
+                         <option value = "Kids">Kids</option>
+                    </select>
+                </lable>
+                <lable>
+                    Select by type
+                    <select
+                     ref = "userInput"
+                     required ="true"
+                     value = {this.state.type}
+                     onChange = {this.onChangetype.bind(this)}
+                     >
+                         <option value = ""></option>
+                         <option value = "Shoes">Shoes</option>
+                         <option value = "Dress">Dress</option>
+                         <option value = "Jacket">Jacket</option>
+                         <option value = "Blouse">Blouse</option>
+                         <option value = "Gloves">Gloves</option>
+                         <option value = "Hat">Hat</option>
+                         <option value = "Scarf">Scarf</option>
+                    </select>
+                </lable>
+               
+                <table className = "table">
+                <thead className = "thead">
+                    <tr>
+                        <th>Item</th>
+                        <th>Category</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Donor Phone Number</th>
+                        <th>Image</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {this.itemsList()}
+                </tbody>
+                </table>
+            </div>
+            <Footer />
+            </div>
+        )
+    }
 }
 export default withRouter(ItemsList);
