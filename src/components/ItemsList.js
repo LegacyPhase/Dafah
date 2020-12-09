@@ -89,7 +89,7 @@ class ItemsList extends Component {
             <div className = "container text-center border border-light p-9">
                 <h2>Clothing</h2>
                 <lable>
-                    Select by category..
+                    Select by category
                     <select
                      ref = "userInput"
                      required ="true"
@@ -103,7 +103,7 @@ class ItemsList extends Component {
                     </select>
                 </lable>
                 <lable>
-                    Select by type..
+                    Select by type
                     <select
                      ref = "userInput"
                      required ="true"
@@ -124,7 +124,7 @@ class ItemsList extends Component {
                 <table className = "table">
                 <thead className = "thead">
                     <tr>
-                        <th>Item Name</th>
+                        <th>Item</th>
                         <th>Category</th>
                         <th>Type</th>
                         <th>Description</th>

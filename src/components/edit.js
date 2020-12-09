@@ -83,7 +83,7 @@ export default class EditItems extends Component {
     axios
       .post(
         "http://localhost:3000/addItems/update/" + this.props.match.params.id,
-        item,
+        item
       )
       .then((res) => console.log(res.data));
 
