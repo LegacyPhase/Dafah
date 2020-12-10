@@ -22,13 +22,31 @@ const ClothesItem = (props) => (
       />
     </td>
     <td>
-      <Link
+      {/* <Link
       style={{width:120, height:40}}
         to={"/edit/" + props.item._id}
         className="btn btn-deep-orange darken-4"
       >
         Edit
-      </Link>
+      </Link> */}
+
+      <button style={{width:120,height:40}}
+      type="button" 
+      className="btn btn-deep-orange darken-4"  
+      onClick={() =>{
+        console.log("onclick")
+        if(window.localStorage.length > 0 && window.localStorage.username === props.item.username){
+          window.location.href = "/edit/" + props.item._id;
+          console.log("worked")
+        }else{
+           alert("user can only edit the items he added");
+           console.log("didnt work")
+        }
+      }}
+      >
+        Edit
+      </button>
+
       <button style={{width:120,height:40}}
         type="button"
         className="btn btn-deep-orange darken-4"
