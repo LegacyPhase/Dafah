@@ -1,18 +1,15 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Footer from "./Footer";
-
 //creat a class for the sign up component
 export default class Signup extends Component {
   constructor(props) {
     super(props);
-
     //bind functions, you can use this.function without the need to bind it everytime
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
     this.onChangePhone = this.onChangePhone.bind(this);
     this.onChangeAddress = this.onChangeAddress.bind(this);
-
     this.handleClick = this.handleClick.bind(this);
     //the keys are the same as the Schema .. see the modle userSchema in user.model.js line 6 or so.
     //this will work as blue prent to our state
@@ -48,7 +45,6 @@ export default class Signup extends Component {
       address: e.target.value,
     });
   }
-
   handleClick() {
     this.onSubmit(this.state.value);
     this.handleSubmit(this.state.value);
@@ -59,7 +55,6 @@ export default class Signup extends Component {
     let passwordError = "";
     let phoneError = "";
     let addressError = "";
-
     if (!this.state.username) {
       usernameError =
         "Please fill your username and try to make it 3 characters or more!";
@@ -76,7 +71,6 @@ export default class Signup extends Component {
       addressError =
         "Please enter your address!";
     }
-
     if (usernameError || passwordError || phoneError || addressError) {
       this.setState({ usernameError, passwordError, phoneError, addressError });
       return false;
@@ -89,7 +83,6 @@ export default class Signup extends Component {
       console.log(this.state);
     }
   };
-
   onSubmit() {
     //where we set the state and send it in the post request
     const user = {
@@ -107,7 +100,6 @@ export default class Signup extends Component {
       .catch((err) => alert("user name or phone number is used"));
     //console.log('user added')
   }
-
   //where the magic happence
   render() {
     return (
@@ -116,7 +108,6 @@ export default class Signup extends Component {
         <div className="container text-center">
           <form
             className="text-center border border-light p-9"
-            
           >
             <h3 className="mb-3">Sign Up</h3>
             <br />
@@ -134,7 +125,6 @@ export default class Signup extends Component {
               <div style={{ color: "red" }}>{this.state.usernameError}</div>
               <br></br>
             </div>
-
             <div className="col">
               <label> Create password </label>
               <br></br>
@@ -150,10 +140,8 @@ export default class Signup extends Component {
               <div style={{ color: "red" }}>{this.state.passwordError}</div>
               <br></br>
             </div>
-
             <div className="col">
               <label> Phone number </label>
-
               <input
                 required="true"
                 className="form-control col"
@@ -164,7 +152,6 @@ export default class Signup extends Component {
               <div style={{ color: "red" }}>{this.state.phoneError}</div>
               <br></br>
             </div>
-
             <div className="col">
               <label> Address </label>
               <br></br>
@@ -179,7 +166,6 @@ export default class Signup extends Component {
               <div style={{ color: "red" }}>{this.state.addressError}</div>
               <br></br>
             </div>
-
             <input
               type="button"
               value="Creat Account"

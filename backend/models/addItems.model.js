@@ -12,6 +12,8 @@ const addItemsSchema = new Schema(
     description: { type: String, required: true, trim: true },
     phoneNumber: { type: Number, required: true, trim: true },
     image: { type: String, required: true, trim: true },
+    username: { type: String, required: true, unique: true, minlength: 3, trim: true,
+    },
   },
   {
     timestamps: true,
