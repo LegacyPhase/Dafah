@@ -14,6 +14,7 @@ class AddItems extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.onChangeimg = this.onChangeimg.bind(this);
     this.onChangetype = this.onChangetype.bind(this);
+    this.onChangeUserName = this.onChangeUserName.bind(this);
     this.handleUpload = this.handleUpload.bind(this);
     this.state = {
       itemName: "",
@@ -23,10 +24,19 @@ class AddItems extends Component {
       image: null,
       url: "",
       type: "Jacket",
+      username: "",
     };
   }
   //List of category
   //Event Handlers:
+
+  onChangeUserName(e){
+
+    this.setState({
+      username: e.target.value,
+    });
+  }
+
   onChangeItemName(e) {
     this.setState({
       itemName: e.target.value,
@@ -61,8 +71,8 @@ class AddItems extends Component {
       });
     } else console.log("error in onchangeimg");
   }
-  handleUpload() {
-    // e.preventDefault();
+  handleUpload(e) {
+    e.preventDefault();
     const uploadTask = storage
       .ref(`/images/${this.state.image.name}`)
       .put(this.state.image);
@@ -85,6 +95,8 @@ class AddItems extends Component {
       }
     );
   }
+
+
   onSubmit(e) {
     e.preventDefault();
     const item = {
@@ -93,34 +105,26 @@ class AddItems extends Component {
       description: this.state.description,
       phoneNumber: this.state.phoneNumber,
       type: this.state.type,
+      username: this.state.username,
       image: this.state.url,
     };
     console.log(item);
-    axios
-      .post("http://localhost:3000/addItems/add", item)
-      .then((res) => console.log(res.data, "nooooooo"));
-    window.location = "/ItemsList";
+    axios.post("http://localhost:3000/addItems/add", item)
+      .then(res => console.log(res.data));
+    window.location = '/ItemsList'
   }
   render() {
-    console.log("image", this.state.image);
+
     return (
       <div>
         <br />
-        <div className="container">
-          <form
-            className="text-center border border-light p-9"
-            action="#!"
-            onSubmit={this.onSubmit}
-          >
-            <h3>
-              {" "}
-              "Only by giving are you able to receive more than you already
-              have." -Jim Rohn{" "}
-            </h3>
+        <div className = "container">
+          <form className="text-center border border-light p-9" action="#!" >
+            <h3> "Only by giving you are able to receive more than you already have." -Jim Rohn </h3>
             <p className="h4 mb-4">Donate Your Item</p>
-            <div className="col">
-              <label>Item Name</label>
-              <input
+                <div className="col">
+                <label>Item</label>
+                <input 
                 required="true"
                 type="text"
                 className="form-control"
@@ -189,16 +193,31 @@ class AddItems extends Component {
               />
             </div>
             <br />
+
             <div className="col">
-              <label>Add Image as URL</label>
+              <label> Donor Name</label>
+              <input
+                type="text"
+                required="true"
+                className="form-control"
+                value={this.state.username}
+                onChange={this.onChangeUserName}
+                placeholder="Please insert your Name"
+              />
+            </div>
+            <br />
+
+
+            <div className="col">
+              <label>Add Image</label>
               <input
                 type="file"
                 required="true"
                 className="form-control"
-                // value = {this.state.image}
                 onChange={this.onChangeimg}
+                
               />
-              <button onClick={this.handleUpload}>Upload</button>
+              <button  onClick={this.handleUpload}>Upload</button>
               <br />
               <img
                 src={this.state.url || "http://via.placeholder.com/100x150"}
@@ -207,7 +226,7 @@ class AddItems extends Component {
             </div>
             <br />
             <div>
-              <button type="submit" className="btn btn-deep-orange darken-4">
+              <button type="submit" className="btn btn-deep-orange darken-4" onClick = {this.onSubmit}>
                 Submit
               </button>
             </div>

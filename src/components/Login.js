@@ -39,6 +39,7 @@ export default class Login extends Component {
       .then((response) => {
         console.log(response, " toooooooooooooooooooken");
         window.localStorage.setItem("token", response.data);
+        window.localStorage.setItem("username", user.username);
         /// after signing the token , verify the token
         axios
           .post("http://localhost:3000/addUser/verify", response)
