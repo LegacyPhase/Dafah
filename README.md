@@ -1,4 +1,4 @@
-# Dafa
+# Dafah
 ​
 > a website that allows people to upload images and description of winter supplies, and allows people in need to go on and choose what they need. to later be delivered to them.
 ​
