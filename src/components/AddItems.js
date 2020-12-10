@@ -14,6 +14,7 @@ class AddItems extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.onChangeimg = this.onChangeimg.bind(this);
     this.onChangetype = this.onChangetype.bind(this);
+    this.onChangeUserName = this.onChangeUserName.bind(this);
     this.handleUpload = this.handleUpload.bind(this);
     this.state = {
       itemName: "",
@@ -23,10 +24,19 @@ class AddItems extends Component {
       image: null,
       url: "",
       type: "Jacket",
+      username: "",
     };
   }
   //List of category
   //Event Handlers:
+
+  onChangeUserName(e){
+
+    this.setState({
+      username: e.target.value,
+    });
+  }
+
   onChangeItemName(e) {
     this.setState({
       itemName: e.target.value,
@@ -85,6 +95,8 @@ class AddItems extends Component {
       }
     );
   }
+
+
   onSubmit(e) {
     e.preventDefault();
     const item = {
@@ -93,6 +105,7 @@ class AddItems extends Component {
       description: this.state.description,
       phoneNumber: this.state.phoneNumber,
       type: this.state.type,
+      username: this.state.username,
       image: this.state.url,
     };
     console.log(item);
@@ -101,7 +114,7 @@ class AddItems extends Component {
     window.location = '/ItemsList'
   }
   render() {
-    console.log("image", this.state.image);
+
     return (
       <div>
         <br />
@@ -180,16 +193,31 @@ class AddItems extends Component {
               />
             </div>
             <br />
+
+            <div className="col">
+              <label> Donor Name</label>
+              <input
+                type="text"
+                required="true"
+                className="form-control"
+                value={this.state.username}
+                onChange={this.onChangeUserName}
+                placeholder="Please insert your Name"
+              />
+            </div>
+            <br />
+
+
             <div className="col">
               <label>Add Image</label>
               <input
                 type="file"
                 required="true"
                 className="form-control"
-                // value = {this.state.image}
                 onChange={this.onChangeimg}
+                
               />
-              <button onClick={this.handleUpload}>Upload</button>
+              <button  onClick={this.handleUpload}>Upload</button>
               <br />
               <img
                 src={this.state.url || "http://via.placeholder.com/100x150"}

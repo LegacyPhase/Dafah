@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import axios from "axios";
 import Footer from "./Footer";
+import AddItems from "./AddItems";
 import { Form , DropdownButton } from 'react-bootstrap';
 const ClothesItem = (props) => (
   <tr>
@@ -10,6 +11,7 @@ const ClothesItem = (props) => (
     <td>{props.item.type}</td>
     <td>{props.item.description}</td>
     <td>{props.item.phoneNumber}</td>
+    <td>{props.item.username}</td>
     <td>
       <img
         src={props.item.image}
@@ -31,7 +33,13 @@ const ClothesItem = (props) => (
         type="button"
         className="btn btn-deep-orange darken-4"
         onClick={() => {
-          props.deleteItem(props.item._id);
+          console.log( props.item, "thiiiis")
+          console.log( window.localStorage.username, " Storaaaage")
+          if(window.localStorage.length > 0 && window.localStorage.username === props.item.username){
+              props.deleteItem(props.item._id);
+          }
+          else {alert("user can only delete the items he added");}
+
         }}
       >
         Delete
@@ -49,6 +57,7 @@ class ItemsList extends Component {
       SearchString: "",
       category: "",
       type: "",
+      username:""
     };
   }
   componentDidMount() {
@@ -63,18 +72,28 @@ class ItemsList extends Component {
       });
   }
   deleteItem(id) {
-    axios
-      .delete("http://localhost:3000/addItems/" + id)
-      .then((res) => console.log(res.data));
-    this.setState({
-      items: this.state.items.filter((el) => el._id !== id),
-    });
+
+    // console.log( window.localStorage.username, " Storaaaage")
+    // console.log(this.props.items.username, " thisssss")
+  
+          axios
+            .delete("http://localhost:3000/addItems/" + id)
+            .then((res) => console.log(res.data));
+          this.setState({
+            items: this.state.items.filter((el) => el._id !== id),
+          });
+
   }
+  
+
   itemsList() {
+    
     let listedItems =
       this.state.filteredItems.length > 0
         ? this.state.filteredItems
         : this.state.items;
+      
+
     return listedItems.map((currentItem) => {
       return (
         <ClothesItem
@@ -84,6 +103,7 @@ class ItemsList extends Component {
         />
       );
     });
+   
   }
   onChangecategory(e) {
     let { items } = this.state;
@@ -141,6 +161,7 @@ class ItemsList extends Component {
                 <th>Type</th>
                 <th>Description</th>
                 <th>Donor Phone Number</th>
+                <th>Donor Name</th>
                 <th>Image</th>
               </tr>
             </thead>
