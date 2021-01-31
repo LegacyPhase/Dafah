@@ -3,7 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import axios from "axios";
 import Footer from "./Footer";
 import AddItems from "./AddItems";
-import { Form , DropdownButton } from 'react-bootstrap';
+import { Form, DropdownButton } from "react-bootstrap";
 const ClothesItem = (props) => (
   <tr>
     <td>{props.item.itemName}</td>
@@ -30,34 +30,42 @@ const ClothesItem = (props) => (
         Edit
       </Link> */}
 
-      <button style={{width:120,height:40}}
-      type="button" 
-      className="btn btn-deep-orange darken-4"  
-      onClick={() =>{
-        console.log("onclick")
-        if(window.localStorage.length > 0 && window.localStorage.username === props.item.username){
-          window.location.href = "/edit/" + props.item._id;
-          console.log("worked")
-        }else{
-           alert("user can only edit the items he added");
-           console.log("didnt work")
-        }
-      }}
+      <button
+        style={{ width: 120, height: 40 }}
+        type="button"
+        className="btn btn-deep-orange darken-4"
+        onClick={() => {
+          console.log("onclick");
+          if (
+            window.localStorage.length > 0 &&
+            window.localStorage.username === props.item.username
+          ) {
+            window.location.href = "/edit/" + props.item._id;
+            console.log("worked");
+          } else {
+            alert("user can only edit the items he added");
+            console.log("didnt work");
+          }
+        }}
       >
         Edit
       </button>
 
-      <button style={{width:120,height:40}}
+      <button
+        style={{ width: 120, height: 40 }}
         type="button"
         className="btn btn-deep-orange darken-4"
         onClick={() => {
-          console.log( props.item, "thiiiis")
-          console.log( window.localStorage.username, " Storaaaage")
-          if(window.localStorage.length > 0 && window.localStorage.username === props.item.username){
-              props.deleteItem(props.item._id);
+          console.log(props.item, "thiiiis");
+          console.log(window.localStorage.username, " Storaaaage");
+          if (
+            window.localStorage.length > 0 &&
+            window.localStorage.username === props.item.username
+          ) {
+            props.deleteItem(props.item._id);
+          } else {
+            alert("user can only delete the items he added");
           }
-          else {alert("user can only delete the items he added");}
-
         }}
       >
         Delete
@@ -75,7 +83,7 @@ class ItemsList extends Component {
       SearchString: "",
       category: "",
       type: "",
-      username:""
+      username: "",
     };
   }
   componentDidMount() {
@@ -90,27 +98,22 @@ class ItemsList extends Component {
       });
   }
   deleteItem(id) {
-
     // console.log( window.localStorage.username, " Storaaaage")
     // console.log(this.props.items.username, " thisssss")
-  
-          axios
-            .delete("http://localhost:3000/addItems/" + id)
-            .then((res) => console.log(res.data));
-          this.setState({
-            items: this.state.items.filter((el) => el._id !== id),
-          });
 
+    axios
+      .delete("http://localhost:3000/addItems/" + id)
+      .then((res) => console.log(res.data));
+    this.setState({
+      items: this.state.items.filter((el) => el._id !== id),
+    });
   }
-  
 
   itemsList() {
-    
     let listedItems =
       this.state.filteredItems.length > 0
         ? this.state.filteredItems
         : this.state.items;
-      
 
     return listedItems.map((currentItem) => {
       return (
@@ -121,7 +124,6 @@ class ItemsList extends Component {
         />
       );
     });
-   
   }
   onChangecategory(e) {
     let { items } = this.state;
@@ -129,8 +131,12 @@ class ItemsList extends Component {
     this.setState({
       category: e.target.value,
     });
+
     let filteredItems = items.filter((item) => item.category.includes(string));
+    // console.log(filteredItems, "flllll");
+
     this.setState({ filteredItems: filteredItems });
+    // console.log(this.state.items, "filtered");
   }
   onChangetype(e) {
     let { filteredItems } = this.state;
@@ -138,6 +144,7 @@ class ItemsList extends Component {
     this.setState({
       type: e.target.value,
     });
+    console.log(filteredItems, "filteredItems");
     filteredItems = filteredItems.filter((item) => item.type.includes(string));
     this.setState({ filteredItems: filteredItems });
   }
@@ -148,29 +155,54 @@ class ItemsList extends Component {
         <div className="container text-center border border-light p-9">
           <h2>Clothing</h2>
           <Form>
-  <Form.Group controlId="exampleForm.SelectCustomSizeSm"  onChange={this.onChangetype.bind(this)} >
-    {/* <Form.Label>Select by type</Form.Label> */}
-    <Form.Control as="select"  size="sm" custom style={{width:155, color:'white', border:'orange', margin:"50px 0px 10px 250px", background:'#212121'}} >
-    <option value="">Select by type</option>
-    <option value="Shoes">Shoes</option>
-    <option value="Dress">Dress</option>
-    <option value="Jacket">Jacket</option>
-    <option value="Blouse">Blouse</option>
-    <option value="Gloves">Gloves</option>
-    <option value="Hat">Hat</option>
-    <option value="Scarf">Scarf</option>
-    </Form.Control>
-  </Form.Group>
-  <Form.Group controlId="exampleForm.SelectCustomSizeSm" >
-    {/* <Form.Label>Select by category</Form.Label> */}
-    <Form.Control as="select" size="sm" custom onChange={this.onChangecategory.bind(this)} style={{width:155, margin:'-100px 250px 10px 0px', background:'#212121',color:'white'}}>
-    <option value="">Select by category</option>
-    <option value="Women">Women</option>
-    <option value="Men">Men</option>
-    <option value="Kids">Kids</option>
-    </Form.Control>
-  </Form.Group>
-</Form>
+            <Form.Group
+              controlId="exampleForm.SelectCustomSizeSm"
+              onChange={this.onChangetype.bind(this)}
+            >
+              {/* <Form.Label>Select by type</Form.Label> */}
+              <Form.Control
+                as="select"
+                size="sm"
+                custom
+                style={{
+                  width: 155,
+                  color: "white",
+                  border: "orange",
+                  margin: "50px 0px 10px 250px",
+                  background: "#212121",
+                }}
+              >
+                <option value="">Select by type</option>
+                <option value="Shoes">Shoes</option>
+                <option value="Dress">Dress</option>
+                <option value="Jacket">Jacket</option>
+                <option value="Blouse">Blouse</option>
+                <option value="Gloves">Gloves</option>
+                <option value="Hat">Hat</option>
+                <option value="Scarf">Scarf</option>
+              </Form.Control>
+            </Form.Group>
+            <Form.Group controlId="exampleForm.SelectCustomSizeSm">
+              {/* <Form.Label>Select by category</Form.Label> */}
+              <Form.Control
+                as="select"
+                size="sm"
+                custom
+                onChange={this.onChangecategory.bind(this)}
+                style={{
+                  width: 155,
+                  margin: "-100px 250px 10px 0px",
+                  background: "#212121",
+                  color: "white",
+                }}
+              >
+                <option value="">Select by category</option>
+                <option value="Women">Women</option>
+                <option value="Men">Men</option>
+                <option value="Kids">Kids</option>
+              </Form.Control>
+            </Form.Group>
+          </Form>
           <table className="table">
             <thead className="thead">
               <tr>
@@ -192,14 +224,3 @@ class ItemsList extends Component {
   }
 }
 export default withRouter(ItemsList);
-
-
-
-
-
-
-
-
-
-
-
